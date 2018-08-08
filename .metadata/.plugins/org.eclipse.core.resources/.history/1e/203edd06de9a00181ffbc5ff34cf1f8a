@@ -1,0 +1,13 @@
+package com.example.sample;
+
+public class HelloWorldBean {
+
+	private String msg;
+
+	public HelloWorldBean(String msg) {
+		// TODO Auto-generated constructor stub
+	this.msg = msg;
+	
+	
+	}
+}
