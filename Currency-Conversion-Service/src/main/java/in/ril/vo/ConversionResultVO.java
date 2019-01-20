@@ -11,6 +11,7 @@ public class ConversionResultVO implements Serializable{
 	private String curr;
 	private String amt;
 	private double convINRamt;
+	private ExchangeVO xchgServData;
 	public String getCurr() {
 		return curr;
 	}
@@ -28,6 +29,12 @@ public class ConversionResultVO implements Serializable{
 	}
 	public void setConvINRamt(double convINRamt) {
 		this.convINRamt = convINRamt;
+	}
+	public ExchangeVO getXchgServData() {
+		return xchgServData;
+	}
+	public void setXchgServData(ExchangeVO xchgServData) {
+		this.xchgServData = xchgServData;
 	}
 	
 	

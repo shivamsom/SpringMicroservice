@@ -8,28 +8,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.ril.proxy.ExchgServProxy;
+import in.ril.repo.EmpServRepository;
 import in.ril.vo.ConversionResultVO;
+import in.ril.vo.ExchangeVO;
 
 @RestController
 public class CCSController {
 
 	@Autowired
 	private ExchgServProxy servProxy;
-	@Autowired
-	private org.springframework.core.env.Environment env;
 	
 	
 	@GetMapping("/curr/{curr}/amt/{amt}")
 	public ConversionResultVO convertXtoINR(@PathVariable("curr")String curr,@PathVariable("amt")String amt)
 	{
-	  ConversionResultVO result  = new ConversionResultVO();
-	  result.setAmt(amt);
-	  result.setCurr(curr);
-	 
+	  ConversionResultVO result  = null;
+	  ExchangeVO srvOp =null;
 	  
-	  result.setConvINRamt((Double.parseDouble(servProxy.getExchgVal(curr))* Double.parseDouble(amt)));
-		return result;
+	 srvOp=  servProxy.getExchgVal(curr);
+	  if(srvOp!=null) {
+	    result = new ConversionResultVO();
+		  result.setXchgServData(srvOp);
+		  result.setAmt(amt);
+		  result.setCurr(curr);
+		  result.setConvINRamt(Double.parseDouble(amt)* Double.parseDouble(srvOp.getExchgValue()));
+		  
+	  }
+	return result;
 	}
+	
 	
 	
 }
